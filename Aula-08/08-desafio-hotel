@@ -1,0 +1,37 @@
+# SISTEMA DE RESERVAS DE HOTEL
+
+quartos = {
+    '1 - Simples': 100.00,
+    '2 - Duplo': 150.00,
+    '3 - Luxo': 200.00
+}
+print(quartos)
+print()
+
+print('CADASTRO DE CLIENTES: ')
+print()
+cad_cli_1 = {
+    'nome_idade': [input('1° cliente - Nome: '), int(input('1° cliente - Idade: '))],
+    'quarto': input('Quarto escolhido: '),
+    'dias': int(input('Quantos dias de estadia: '))
+}
+
+
+
+# ------------------------------------------------
+cad_cli_2 = {
+    'nome_idade': [input('2° cliente - Nome: '), int(input('2° cliente - Idade: '))],
+    'quarto': input('Quarto escolhido: '),
+    'dias': int(input('Quantos dias de estadia: '))
+}
+
+
+
+# ------------------------------------------------
+cad_cli_3 = {
+    'nome_idade': [input('3° cliente - Nome: '), int(input('3° cliente - Idade: '))],
+    'quarto': input('Quarto escolhido: '),
+    'dias': int(input('Quantos dias de estadia: '))
+}
+
+print()
