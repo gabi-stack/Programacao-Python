@@ -1,0 +1,59 @@
+# Exercício 1: Verificando se o número é par ou ímpar
+
+numero = int(input('numero>> '))
+
+match numero:
+    case x if x  % 2 ==0:
+        print('par')
+    case _:
+        print('impar')     
+
+# Exercício 2: Verificando se um número é positivo, negativo ou zero
+
+n2 = int(input('Digite um número: '))
+
+match n2:
+    case n2 if n2 == 0:
+        print('zero')
+    case n2 if n2 > 0:
+        print('positivo')
+    case _:
+        print('negativo')
+
+# Exercício 3: Verificando se uma string é vazia ou não
+
+texto = input('Texto: ')
+
+match texto:
+    case '':
+        print('string vazia')
+    case _:
+        print(texto)
+
+# Exercício 4: Verificando se um número é maior, menor ou igual a 10
+
+n3 = int(input('Digite um número: '))
+
+match n3:
+    case 10:
+        print('10')
+    case n3 if n3 > 10:
+        print('maior que 10')
+    case _:
+        print('menor que 10')
+
+# Exercício 5: Classificando uma idade em faixas etárias -  criança(12), adolescente(17), jovem(35), adulto 35 ><64, idoso(65)
+
+idade =  int(input('Idade: '))
+
+match idade:
+    case idade if idade <= 12:
+        print('Criança')
+    case idade if idade >= 13 and idade <=17:
+        print('Adolescente')
+    case idade if idade >= 18  and idade <= 35:
+        print('Jovem')
+    case idade if idade > 35 and idade <= 65:
+        print('Adulto')
+    case _:
+        print('Idoso')       
