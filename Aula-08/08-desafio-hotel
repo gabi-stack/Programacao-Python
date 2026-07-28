@@ -5,33 +5,37 @@ quartos = {
     '2 - Duplo': 150.00,
     '3 - Luxo': 200.00
 }
-print(quartos)
-print()
 
+print()
 print('CADASTRO DE CLIENTES: ')
 print()
 cad_cli_1 = {
     'nome_idade': [input('1° cliente - Nome: '), int(input('1° cliente - Idade: '))],
-    'quarto': input('Quarto escolhido: '),
+    'quarto': int(input(f'{quartos} \nValor do quarto escolhido: ')),
     'dias': int(input('Quantos dias de estadia: '))
 }
-
-
+calculo1 = cad_cli_1['quarto'] * cad_cli_1['dias']
+print()
+print('1° cliente - Valor total R$ ', calculo1,)
+print()
 
 # ------------------------------------------------
 cad_cli_2 = {
     'nome_idade': [input('2° cliente - Nome: '), int(input('2° cliente - Idade: '))],
-    'quarto': input('Quarto escolhido: '),
+    'quarto': int(input(f'{quartos} \nValor do quarto escolhido: ')),
     'dias': int(input('Quantos dias de estadia: '))
 }
-
-
+calculo2 = cad_cli_2['quarto'] * cad_cli_2['dias']
+print()
+print('2° cliente - Valor Total R$ ', calculo2,)
+print()
 
 # ------------------------------------------------
 cad_cli_3 = {
     'nome_idade': [input('3° cliente - Nome: '), int(input('3° cliente - Idade: '))],
-    'quarto': input('Quarto escolhido: '),
+    'quarto': int(input(f'{quartos} \nValor do quarto escolhido: ')),
     'dias': int(input('Quantos dias de estadia: '))
 }
-
+calculo3 = cad_cli_3['quarto'] * cad_cli_3['dias']
 print()
+print('3° cliente - Valor Total R$ ', calculo3,)
