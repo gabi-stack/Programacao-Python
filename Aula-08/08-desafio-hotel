@@ -1,41 +1,68 @@
 # SISTEMA DE RESERVAS DE HOTEL
 
-quartos = {
-    '1 - Simples': 100.00,
-    '2 - Duplo': 150.00,
-    '3 - Luxo': 200.00
-}
+# quartos = {
+#     '1 - Simples': 100.00,
+#     '2 - Duplo': 150.00,
+#     '3 - Luxo': 200.00
+# }
+
+quartos  = ['', 'Simples', 'Duplo', 'Luxo']
+valores  =  ['', 100.00, 150.00, 200.00]
 
 print()
 print('CADASTRO DE CLIENTES: ')
 print()
+print('Cliente_1')
+print()
 cad_cli_1 = {
-    'nome_idade': [input('1° cliente - Nome: '), int(input('1° cliente - Idade: '))],
-    'quarto': int(input(f'{quartos} \nValor do quarto escolhido: ')),
+    'nome_idade': [input('Nome: '), int(input('Idade: '))],
+    'quarto': int(input('''
+    1- Simples: 100.00
+    2- Duplo: 150.00
+    3- Luxo: 200.00
+                        
+Quarto escolhido: ''')),
     'dias': int(input('Quantos dias de estadia: '))
 }
-calculo1 = cad_cli_1['quarto'] * cad_cli_1['dias']
+calculo1 = valores[cad_cli_1['quarto']] * cad_cli_1['dias']
 print()
-print('1° cliente - Valor total R$ ', calculo1,)
+print('Valor a pagar R$', calculo1,)
 print()
 
 # ------------------------------------------------
+
+print('Cliente_2')
+print()
 cad_cli_2 = {
-    'nome_idade': [input('2° cliente - Nome: '), int(input('2° cliente - Idade: '))],
-    'quarto': int(input(f'{quartos} \nValor do quarto escolhido: ')),
+    'nome_idade': [input('Nome: '), int(input('Idade: '))],
+    'quarto': int(input('''
+    1- Simples: 100.00
+    2- Duplo: 150.00
+    3- Luxo: 200.00
+                        
+Quarto escolhido: ''')),
     'dias': int(input('Quantos dias de estadia: '))
 }
-calculo2 = cad_cli_2['quarto'] * cad_cli_2['dias']
+calculo2 = valores[cad_cli_2['quarto']] * cad_cli_2['dias']
 print()
-print('2° cliente - Valor Total R$ ', calculo2,)
+print('Valor a pagar R$', calculo2)
 print()
 
 # ------------------------------------------------
+
+print('Cliente_3')
+print()
 cad_cli_3 = {
-    'nome_idade': [input('3° cliente - Nome: '), int(input('3° cliente - Idade: '))],
-    'quarto': int(input(f'{quartos} \nValor do quarto escolhido: ')),
+    'nome_idade': [input('Nome: '), int(input('Idade: '))],
+    'quarto': int(input('''
+    1- Simples: 100.00
+    2- Duplo: 150.00
+    3- Luxo: 200.00
+                        
+Quarto escolhido: ''')),
     'dias': int(input('Quantos dias de estadia: '))
 }
-calculo3 = cad_cli_3['quarto'] * cad_cli_3['dias']
+calculo3 = valores[cad_cli_3['quarto']] * cad_cli_3['dias']
 print()
-print('3° cliente - Valor Total R$ ', calculo3,)
+print('Valor a pagar R$ ', calculo3,)
+
