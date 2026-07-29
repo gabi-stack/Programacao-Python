@@ -1,0 +1,41 @@
+# SISTEMAS DE NOTAS
+print('\nSISTEMA DE NOTAS\n')
+
+user123 = "prof"
+senha123 = 123
+
+print('Acesso à conta:\n')
+
+chances = 3
+
+while chances > 0:
+    login = input('Login: ')
+    senha = int(input('Senha: '))
+    chances -= 1
+    if login == user123 and senha == senha123:
+        print('\nAcesso Liberado!')
+        
+        print('\nCalcular média:\n')
+        
+        nota1 = float(input('1 nota >> '))
+        nota2 = float(input('2 nota >> '))
+        nota3 = float(input('3 nota >> '))
+        media = float(nota1+nota2+nota3)/3
+        
+        print(f'\nMédia final: {media:.2f}')
+
+        if media >= 6:
+             print('Aluno aprovado!')
+        elif media < 6 and media >= 5:
+             print('Aluno em recuperação!')
+        else:
+             print('Aluno reprovado!')
+
+        input('\nAperte ENTER para sair\n')
+    
+    else:
+        print('Login ou senha incorreta.\n')
+
+else:
+        print('Conta bloqueada!')
+
