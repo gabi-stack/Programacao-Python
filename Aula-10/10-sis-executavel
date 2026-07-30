@@ -1,0 +1,33 @@
+***Vamos utilizar a biblioteca `auto-py-to-exe`***
+
+as vezes vai ser necessário utilizar  a versão 10 do python
+
+***Acesse o `CMD` (tela preta)***
+
+***Windows + r, digite `cmd`***
+
+***Vamos utilizar o `pip`, que é o gerenciador de pacotes*** 
+
+***1 - Instalar o `auto-py-to-exe`***
+
+```python
+**pip install auto-py-to-exe**
+```
+
+***2 - Chama para funcionar no cmd mesmo***
+
+```python
+**auto-py-to-exe**  ou   **python -m auto_py_to_exe**
+```
+
+***3  -  Clique no botão para encontrar a raiz do projeto***
+
+***4 -   Clique em `file`***
+
+***5 -   Clique em `Convert`***
+
+***6 -   Projeto pronto***
+
+***6.2 - Clique em Open***
+
+***7 -  Clique `2 x` no arquivo para verificar se estar funcionando corretamente.***
