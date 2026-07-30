@@ -1,0 +1,39 @@
+a = int(input())
+b = int(input())
+
+try:
+      print(a/b)
+
+except ZeroDivisionError as error:
+      print(error)
+
+else:
+      print( ' Sem erros')
+
+finally:
+      print('Aqui sempre vai printar')
+
+
+# -----------------------------------------
+
+
+try:
+    n  =  float(input('>>>'))
+    c =  n + 10
+    x  =  [1,2,3]
+    print(x[5])
+
+except ValueError as erro:
+    print(erro)    
+except TypeError as erro:
+    print(erro)
+except IndexError as erro:
+    print(erro)
+except NameError as erro:
+    print(erro)  
+except ZeroDivisionError as erro:
+    print(erro)   
+else:
+    print('erro não identificado')
+finally:
+    print('Fim de carregamento')
