@@ -1,19 +1,64 @@
-# 1 CRIE UMA FUNÇÃO PARA COMPARAR 2 NÚMEROS (par ou impar). UTILIZE VARIÁVEIS LOCAIS.***
+# 1 CRIE UMA FUNÇÃO PARA COMPARAR 2 NÚMEROS (par ou impar). UTILIZE VARIÁVEIS LOCAIS.
 
-# 2 CRIE UMA FUNÇÃO PARA MULTIPLICAR 3 NUMEROS.***
+def comparar(n1,n2):
 
-# 3 CRIE UMA FUNÇÃO PARA DESCOBRIR O VALOR ELEVADO DE UM NÚMERO.***
+    print(f'Comparando {n1} e {n2}:')
 
-# 4 CRIE UMA FUNÇÃO PARA MOSTRAR UMA MENSAGEM PERSONALIZADA NA TELA, SE O USUÁRIO  DIGITAR, 18 ANOS.***
+    if n1 % 2==0 and n2 % 2 == 1:
+        print(f'{n1} é par')
+    elif  n1 % 2 == 1 and n2 % 2 == 0:
+        print(f'{n2} é par')   
+    elif n1  % 2 ==0 and n2 % 2 == 0:
+        print('Ambos são pares')
+    else:
+        print('Nenhum é par')       
 
-# 5 DESENVOLVA UMA FUNÇÃO PARA DESCOBRIR A IDADE DE UMA PESSOA.***
+comparar(5,22)    
+print()
 
-# 6 DESENVOLVA UMA FUNÇÃO PARA VER SE O BRASIL GANHOU A COPA DE 1999.***
+# 2 CRIE UMA FUNÇÃO PARA MULTIPLICAR 3 NUMEROS.
+
+def multiplicar(a,b,c):
+
+    print(f'Multiplicando {a}, {b} e {c} = {a*b*c}')
+
+multiplicar(3,5,2)
+print()
+
+# 3 CRIE UMA FUNÇÃO PARA DESCOBRIR O VALOR ELEVADO DE UM NÚMERO.
+
+# 4 CRIE UMA FUNÇÃO PARA MOSTRAR UMA MENSAGEM PERSONALIZADA NA TELA, SE O USUÁRIO  DIGITAR, 18 ANOS.
+
+# 5 DESENVOLVA UMA FUNÇÃO PARA DESCOBRIR A IDADE DE UMA PESSOA.
+
+def descobrir(ano_atual, ano_nascimento, mes_atual, mes_nascimento):
+    idade  =  ano_atual - ano_nascimento
+    if mes_atual > mes_nascimento:
+        print('A pessoa tem', idade)
+    else:
+        idade_1 = idade - 1
+        print('A pessoa tem',idade_1)    
+
+descobrir(2026,2000,7,10)
+print()
+
+# 6 DESENVOLVA UMA FUNÇÃO PARA VER SE O BRASIL GANHOU A COPA DE 1999.
+
+def copa(ano):
+    lista =  [1958, 1962, 1970, 1994 , 2002]
+    if ano in lista:
+        print(f'No ano {ano} o Brasil ganhou a copa')
+    else:
+        print(f'No ano {ano} o Brasil não Ganhou ')    
+
+copa(1994)
+print()
+
 
 # 7 DESENVOLVA UM SISTEMA DE RESTAURANTE, ONDE O CLIENTE TEM OPÇÃO DE ESCOLHER ENTRE SALADA, MACARRONADA, SANDUICHE, SORVETE.  
-# ***1 - Função -  cumprimentar o cliente***
-# ***2 - Função - restaurante***
-# ***3 - Sugestão utilize listas  e loops***
+    # 1 - Função -  cumprimentar o cliente
+    # 2 - Função - restaurante
+    # 3 - Sugestão utilize listas  e loops
 
 def cumprimentar(nome):
     return f'SEJA BEM VINDO! {nome}'
