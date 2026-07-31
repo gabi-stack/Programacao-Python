@@ -1,0 +1,99 @@
+ATIVIDADE 2:
+
+CRIE UM MERCADO 
+
++ Utilize arquivos separados, parâmetros para realizar 
+essa atividade
+
+- UTILIZE LISTAS    
+- MOSTRAR O VALOR 
+- FAZER O PAGAMENTO  -  função no 'meu_modulo'
+- FINALIZAR A COMPRA
+- SE DESPEDIR DO USUÁRIO  -  função no 'meu_módulo' 
+- UTILIZE PARÂMETROS
+
+
+# main.py
+
+import meu_modulo1
+
+def mercado():
+    nome = input('Digite seu nome: ')
+    meu_modulo1.display1(nome)
+    produtos = ['a','b','c']
+    m =  meu_modulo1.carrinho(produtos)
+    print(m)
+mercado()
+
+
+
+# meu_modulo.py
+
+def display1(nome):
+    print('Olá seja bem vindo', nome)
+
+def carrinho(produtos):
+    meu_carrinho = []
+    print(produtos)
+    p =  input('Deseja fazer o pedido? s/n')
+    while p == 's':
+
+        pedido = input('Digite seu produto:> ')
+        meu_carrinho.append(pedido)
+        p =  input('Deseja fazer o pedido? s/n')
+    return meu_carrinho
+
+
+---------------------------
+
+main.py
+
+# from minhas_funcoes import *
+import minhas_funcoes as dp
+import minhas_funcoes
+from minhas_funcoes import saque
+
+
+
+def banco():
+    print('seja bem vindo(a):')
+    saldo = 5000
+    escolha = input('escolha um operação 1 saque | 2 Deposito | 3 extrato')
+    if escolha == '1':
+        valor_de_saqur = float(input('Saque R$:'))
+        saq = dp.saque(saldo, valor_de_saqur)
+
+        print('Em conta R$', saq)
+    elif escolha =='2':
+        valor_de_dep = float(input('Saque R$:'))
+        dep = dp.deposito(saldo, valor_de_dep)
+        print('Em conta R$', dep)
+    elif escolha == '3':
+        ex = dp.extrato(saldo)
+        print('R$', ex)    
+    else:
+        print('Digite algo válido')
+
+while True:
+      banco()
+
+    
+-----------------------------------------------
+
+
+minhas_funcoes.py
+
+def deposito(saldo,valor):
+    total = saldo + valor
+    return total
+
+
+def saque(saldo, valor):
+    total = saldo - valor
+    return total    
+
+
+def extrato(saldo):
+    return saldo
+
+
