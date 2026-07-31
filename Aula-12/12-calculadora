@@ -1,0 +1,62 @@
+Exemplo:
+
+
+arquivo: 
+# calculadora.py
+
+from divisao import div
+from multiplicacao import mult
+from soma import soma
+from subtracao import subtracao
+
+
+
+
+def calculadora():
+    n1 = float(input('nº >>'))
+    op = input('>>')
+    if op == '+': 
+       n2 = float(input('>>')) 
+       s  = soma(n1,n2)
+       print(s)
+    elif op == '-': 
+       n2 = float(input('>>')) 
+       s  = subtracao(n1,n2)
+       print(s)
+    elif op == '*': 
+       n2 = float(input('>>')) 
+       s = mult(n1,n2)
+       print(s)
+    elif op == '/': 
+       n2 = float(input('>>')) 
+       s = div(n1,n2)
+       print('=', s)       
+
+
+calculadora()       
+
+
+# divisao.py
+
+def div(a,b):
+    if b == 0:
+        print('A divisor não pode ser 0')
+    else: return a / b
+    
+    
+# multiplicacao.py
+
+def mult(a,b):
+    return a * b
+    
+    
+# soma.py
+
+def soma(a,b):
+    return a + b
+    
+# subtracao.py
+
+def sub(a,b):
+    return a - b
+    
