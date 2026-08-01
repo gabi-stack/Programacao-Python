@@ -1,0 +1,43 @@
+import statistics
+
+def estatistica(lista_notas):
+    moda  =  round(statistics.mode(lista_notas),2)
+    media = round(statistics.mean(lista_notas),2)
+    desvio =  round(statistics.stdev(lista_notas),2)
+    mediana =  round(statistics.median(lista_notas),2)
+    variancia =  round(statistics.variance(lista_notas),2)
+    menor =  round(min(lista_notas),2)
+    maior =  round(max(lista_notas),2)
+
+    return f'''
+            MODA = {moda}
+            MÉDIA = {media}
+            DESVIO PADRÃO = {desvio}
+            MEDIANA = {mediana} 
+            VARIÂNCIA = {variancia}
+            MENOR NOTA = {menor}
+            MAIOR NOTA = {maior}
+    '''
+# ---------------------------------------------------------
+
+import funcoes as fc
+
+def sistema_notas():
+    lista_notas = []
+    pergunta1 = input('Inserir nota? ')
+    while pergunta1 == 's':
+        nota = float(input('NOTA: '))
+        lista_notas.append(nota)
+        pergunta1 = input('Inserir nota? ')
+    else:
+        pergunta2 = input('\nCalcular estatísticas? ')
+
+        if pergunta2 == 'sim':
+            estatisticas = fc.estatistica(lista_notas)
+            lista_notas.sort()
+            print('\nLISTA DE NOTAS:', lista_notas)
+            print(estatisticas)
+        else:
+            pergunta3 = input('Aperte ENTER para sair.')
+
+sistema_notas()
