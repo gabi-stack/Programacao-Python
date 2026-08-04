@@ -9,22 +9,36 @@ def estatistica(lista_notas):
     menor =  round(min(lista_notas),2)
     maior =  round(max(lista_notas),2)
 
-    return f'''
-            MODA = {moda}
-            MÉDIA = {media}
-            DESVIO PADRÃO = {desvio}
-            MEDIANA = {mediana} 
-            VARIÂNCIA = {variancia}
-            MENOR NOTA = {menor}
-            MAIOR NOTA = {maior}
-    '''
+    c = set(lista_notas)
+    # Verifica se existe moda (repetição) na lista
+    if len(lista_notas) == len(c):
+
+        return f'''
+                MODA = N/A
+                MÉDIA = {media}
+                DESVIO PADRÃO = {desvio}
+                MEDIANA = {mediana} 
+                VARIÂNCIA = {variancia}
+                MENOR NOTA = {menor}
+                MAIOR NOTA = {maior}
+        '''
+    else:
+        return f'''
+                MODA = {moda}
+                MÉDIA = {media}
+                DESVIO PADRÃO = {desvio}
+                MEDIANA = {mediana} 
+                VARIÂNCIA = {variancia}
+                MENOR NOTA = {menor}
+                MAIOR NOTA = {maior}
+        '''
 # ---------------------------------------------------------
 
-import funcoes as fc
+import modulo as m
 
 def sistema_notas():
     lista_notas = []
-    pergunta1 = input('Inserir nota? ')
+    pergunta1 = input('\nInserir nota? ')
     while pergunta1 == 's':
         nota = float(input('NOTA: '))
         lista_notas.append(nota)
@@ -33,7 +47,7 @@ def sistema_notas():
         pergunta2 = input('\nCalcular estatísticas? ')
 
         if pergunta2 == 'sim':
-            estatisticas = fc.estatistica(lista_notas)
+            estatisticas = m.estatistica(lista_notas)
             lista_notas.sort()
             print('\nLISTA DE NOTAS:', lista_notas)
             print(estatisticas)
