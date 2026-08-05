@@ -1,12 +1,5 @@
 import os
 
-
-with open('exemplo.txt', 'r') as arquivo:
-    conteudo = arquivo.read()
-    print(conteudo)
-# O arquivo é automaticamente fechado após sair do bloco "with"
-
-
 # Criar um arquivo  "with"
 with open('novo_diretorio', 'w') as novo_arquivo:
     os.mkdir('novo_arquivo')
