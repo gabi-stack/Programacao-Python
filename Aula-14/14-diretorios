@@ -54,3 +54,11 @@ import shutil
 shutil.copytree('original', 'nome da copia')
 # serve para pastas -> diretórios
 
+# ‘a’	inserir novos dados no final do arquivo
+# ‘w’	Escrita, vai substituir o arquivo existente
+# ‘r’	leitura
+# ‘x’	retorna erro caso o arquivo já exista
+# ‘t’	modo de texto padrão
+# ‘+’	atualizar leitura e escrita
+
+
