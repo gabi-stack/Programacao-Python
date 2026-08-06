@@ -1,0 +1,32 @@
+import os
+import shutil
+
+# Executar um de cada vez
+
+# Exercício 1: Criar e ler um Arquivo
+
+with open ('Novo Arquivo.txt', 'w') as arquivo:
+    arquivo.write('Este arquivo foi criado com python')
+
+with open ('Novo Arquivo.txt', 'r') as arquivo:
+    print(arquivo.read())
+
+# Exemplo 2: Cria um Diretório
+
+os.mkdir('Novo diretorio')
+
+# Exercício 3: Renomear um Diretório
+
+os.rename('Novo diretorio', 'Nova pasta')
+
+# Exercício 4:  Listar Arquivos em um Diretório 
+
+print(os.listdir('C:/Users/Aluno/Downloads/Nova pasta'))
+
+# Exercício 5:  Copiar Arquivos em um Diretório
+
+shutil.copy2('C:/Users/Aluno/Downloads/Nova pasta/Novo Arquivo.txt', 'C:/Users/Aluno/Downloads/Nova pasta/Nova pasta/Copia Novo Arquivo.txt')
+
+# Exercício 6:  Remover
+
+os.remove('C:/Users/Aluno/Downloads/Nova pasta/Novo Arquivo.txt')
