@@ -1,0 +1,17 @@
+TESTES
+
+Processo no qual se avalia a qualidade de um software através da execução de diferentes tipos de testes, visando identificar defeitos, bugs ou falhas no funcionamento do programa. Isso é essencial para garantir que o software atenda aos requisitos especificados e funcione corretamente para os usuários finais.
+Passos básicos:
+Planejamento: Entenda os requisitos do software e planeje quais tipos de testes serão necessários, levando em consideração a funcionalidade, desempenho, segurança, usabilidade, entre outros aspectos.
+Criação de Casos de Teste: Com base nos requisitos e no planejamento, crie casos de teste detalhados que cobrem diferentes cenários de uso do software.
+Configuração do Ambiente de Teste: Prepare o ambiente de teste, que pode incluir hardware, software, banco de dados, redes, entre outros componentes, conforme necessário para executar os testes.
+Execução de Testes: Execute os casos de teste conforme planejado, registrando os resultados e identificando quaisquer problemas encontrados.
+Relatórios e Correções: Documente os resultados dos testes e quaisquer defeitos encontrados. Comunique essas informações à equipe de desenvolvimento para que possam ser corrigidos.
+Reteste: Após as correções, repita os testes para garantir que os problemas foram resolvidos e que novos problemas não foram introduzidos.
+As principais plataformas para realizar testes de software com foco em Python incluem:
+unittest: O módulo unittest é uma estrutura de teste padrão em Python, inspirada no framework de teste JUnit do Java. Ele permite a criação e execução de testes de unidade de forma fácil e eficiente.
+pytest: O pytest é uma estrutura de teste mais flexível e poderosa em comparação com unittest. Ele oferece recursos avançados para escrever e executar testes de forma mais simples e expressiva.
+nose2: O nose2 é outro framework de teste popular em Python, que é uma evolução do nose. Ele fornece uma interface mais amigável e recursos adicionais para testes de unidade, integração e cobertura de código.
+Robot Framework: Embora não seja exclusivamente para Python, o Robot Framework é uma ferramenta de automação de teste de código aberto que suporta testes de aceitação, teste de sistema e testes de unidade. Ele permite escrever testes em uma linguagem de fácil compreensão e tem uma integração robusta com Python.
+https://prairie-heath-fb8.notion.site/AULA-15-Testes-20c2d72c89f945269d157e8313bc326d
+
