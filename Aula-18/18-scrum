@@ -32,3 +32,35 @@ Pessoa 4? Equipe de TI
 - Ajudar a melhorar processos (Retrospectivas).  
 
 Habilidades: Colaboração, autonomia e habilidades técnicas.  
+
+
+
+***Scrum é um framework de gerenciamento que as equipes usam para se auto-organizar e trabalhar em direção a um objetivo em comum.***   
+
+ATAPAS: 
+
+Product Backlog: Uma lista priorizada de todas as funcionalidades desejadas para o produto.
+
+Sprint Planning: Uma reunião onde a equipe seleciona as histórias do usuário ou itens do backlog para incluir no sprint e estabelece o objetivo do sprint.
+
+Sprint: Um período de tempo fixo, geralmente de 1 a 4 semanas, durante o qual o trabalho é realizado para alcançar o objetivo definido.
+
+Daily Scrum: Reuniões diárias curtas (cerca de 15 minutos) onde a equipe compartilha o progresso, identifica impedimentos e planeja o trabalho para o dia.
+
+Sprint Review: Uma reunião ao final do sprint onde a equipe demonstra o trabalho concluído ao Product Owner e outras partes interessadas, obtém feedback e revisa o backlog do produto.
+
+Sprint Retrospective: Uma reunião onde a equipe reflete sobre o sprint, identifica o que funcionou bem e o que pode ser melhorado, e cria um plano de ação para implementar essas melhorias no próximo sprint.
+
+Incremento: O produto funcional e potencialmente entregável criado ao final de cada sprint, que deve adicionar valor ao produto.
+
+Ferramenta utilizada no modelo Scrum: KANBAN
+
+Esse tipo de metodologia engloba a utilização de um quadro com 3 dimensões e um backlog
+
+No backlog as demandas. 
+
+Nas dimensões 
+
+***BACKLOG     do    -   doing   -   done***
+
+                      ***Fazer  - Fazendo - Feito***
