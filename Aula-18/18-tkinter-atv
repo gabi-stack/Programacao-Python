@@ -1,0 +1,95 @@
+# Sistema de Cadastro de Clientes
+
+# Crie um formulário em Tkinter que contenha os seguintes campos: Nome, Idade, E-mail, Endereço, Celular, Cep, Cidade, Cursos
+# O formulário deve ter um botão de "Enviar" que, quando clicado, imprima as informações do cliente na console.
+
+import tkinter as tk
+
+# FUNÇÃO
+def mostrar():
+    nome = entry_nome.get()
+    idade = entry_idade.get()
+    email = entry_email.get()
+    endereco = entry_celular.get()
+    celular = entry_celular.get()
+    cep = entry_cep.get()
+    cidade = entry_cidade.get()
+    cursos = entry_cursos.get()
+    
+    infos = print(nome, idade, email, endereco,celular, cep, cidade, cursos)
+
+    label_resultado.config(text=infos)
+
+janela  =  tk.Tk()
+janela.geometry('1700x750')
+janela.title('FORMULÁRIO')
+
+# TITULO DO FORM
+titulo  =  tk.Label(janela, text='FORMULARIO DE CADASTRO')
+titulo.pack()
+
+# NOME
+nome_texto = tk.Label(janela, text  =  'Nome') # título
+nome_texto.pack() # input
+
+entry_nome = tk.Entry(janela)
+entry_nome.pack()
+
+# IDADE
+idade_texto = tk.Label(janela, text  =  'Idade')
+idade_texto.pack()
+
+entry_idade = tk.Entry(janela)
+entry_idade.pack()
+
+# E-MAIL
+email_texto = tk.Label(janela, text  =  'E-mail')
+email_texto.pack()
+
+entry_email = tk.Entry(janela)
+entry_email.pack()
+
+# ENDEREÇO
+endereco_texto = tk.Label(janela, text  =  'Endereco')
+endereco_texto.pack()
+
+entry_endereco = tk.Entry(janela)
+entry_endereco.pack()
+
+# CELULAR
+celular_texto = tk.Label(janela, text  =  'Celular')
+celular_texto.pack()
+
+entry_celular = tk.Entry(janela)
+entry_celular.pack()
+
+# CEP
+cep_texto = tk.Label(janela, text  =  'CEP')
+cep_texto.pack()
+
+entry_cep = tk.Entry(janela)
+entry_cep.pack()
+
+# CIDADE
+cidade_texto = tk.Label(janela, text  =  'Cidade')
+cidade_texto.pack()
+
+entry_cidade = tk.Entry(janela)
+entry_cidade.pack()
+
+# CURSOS
+cursos_texto = tk.Label(janela, text  =  'Cursos')
+cursos_texto.pack()
+
+entry_cursos = tk.Entry(janela)
+entry_cursos.pack()
+
+# BOTÃO
+botao_enviar =  tk.Button(janela, text = 'ENVIAR', command=mostrar)
+botao_enviar.pack()
+
+# MENSAGEM
+label_resultado = tk.Label(janela, text="", justify="left", font=("Arial", 10, "bold"))
+label_resultado.pack(pady=10)
+
+janela.mainloop()
