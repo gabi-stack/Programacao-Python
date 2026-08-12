@@ -4,21 +4,32 @@
 # O formulário deve ter um botão de "Enviar" que, quando clicado, imprima as informações do cliente na console.
 
 import tkinter as tk
+from tkinter import messagebox
 
-# FUNÇÃO
+# FUNÇÕES
 def mostrar():
     nome = entry_nome.get()
     idade = entry_idade.get()
     email = entry_email.get()
-    endereco = entry_celular.get()
+    endereco = entry_endereco.get()
     celular = entry_celular.get()
     cep = entry_cep.get()
     cidade = entry_cidade.get()
     cursos = entry_cursos.get()
-    
-    infos = print(nome, idade, email, endereco,celular, cep, cidade, cursos)
 
-    label_resultado.config(text=infos)
+    dados_formatados = (f'''
+           Nome: {nome} 
+           Idade: {idade} 
+           E-mail: {email}  
+           Endereço: {endereco} 
+           Celular: {celular}  
+           CEP: {cep} 
+           Cidade: {cidade} 
+           Cursos: {cursos}''')
+
+    label_resultado.config(text=dados_formatados)
+
+    messagebox.showinfo('Aviso', 'Formulário preenchido com sucesso!')
 
 janela  =  tk.Tk()
 janela.geometry('1700x750')
@@ -89,7 +100,7 @@ botao_enviar =  tk.Button(janela, text = 'ENVIAR', command=mostrar)
 botao_enviar.pack()
 
 # MENSAGEM
-label_resultado = tk.Label(janela, text="", justify="left", font=("Arial", 10, "bold"))
+label_resultado = tk.Label(janela, text='')
 label_resultado.pack(pady=10)
 
 janela.mainloop()
