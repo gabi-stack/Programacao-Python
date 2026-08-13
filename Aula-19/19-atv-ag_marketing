@@ -1,0 +1,81 @@
+# AGÊNCIA DE MARKETING
+
+import sqlite3
+
+c = sqlite3.connect('ag_marketing')
+cs = c.cursor()
+
+cs.execute('''
+CREATE TABLE IF NOT EXISTS Funcionarios(
+    ID integer not null primary key autoincrement,
+    Nome text not null,
+    Idade integer not null,
+    Email text not null, 
+    Endereço text not null,
+    Trabalho text not null,
+    Graduação text not null
+) 
+'''
+)
+
+def cadastro():
+    nome = nome_input.get()
+    idade = idade_input.get()
+    email = email_input.get()
+    endereco = endereco_input.get()
+    trabalho = trabalho_input.get()
+    graduacao = graduacao_input.get()
+
+    cs.execute('INSERT INTO Funcionarios (Nome, Idade, Email, Endereço, Trabalho, Graduação) VALUES (?,?,?,?,?,?)', (nome, idade, email, endereco, trabalho, graduacao))
+    c.commit()
+
+def visualizar():
+    cs.execute('SELECT * FROM Funcionarios')
+    return cs.fetchall() # Trás os dados em forma de listas
+
+# def atualizar():
+#     cs.execute('UPDATE clientes SET email=? WHERE id=?', ())
+#     c.commit()
+
+# def deletar():
+#     cs.execute('DELETE FROM clientes WHERE id = ?', (id_cliente,))
+
+# def sistema():
+#     while True:
+#         op = input(f'''
+#         Opções:
+#         1 - Cadastrar cliente
+#         2 - Atualizar cadastro
+#         3 - Deletar cadastro
+                   
+#         O que deseja fazer? ''')
+
+#         if op == '1':
+#             print('\nCADASTRO')
+#             nome =  input('Nome: ')
+#             email = input('e - mail: ')
+#             cad_cliente(nome, email)
+#             print('\nTabela atualizada: ', list_clientes())
+
+
+#         elif op == '2':
+#             print('\nUPDATE')
+#             print(list_clientes()) 
+#             id  =  int(input('ID do cadastro que deseja atualizar: '))
+#             n_email = input('e - mail: ')
+#             atualizar_email(id, n_email)
+#             print('\nTabela atualizada: ', list_clientes())
+
+
+
+#         elif op == '3':
+#             print('\nDELETE')
+#             print(list_clientes())
+#             id  =  int(input('ID do cadastro que deseja deletar: '))
+#             del_cliente(id)
+#             print('\nTabela atualizada: ', list_clientes())
+
+
+# sistema()
+
+c.close()
