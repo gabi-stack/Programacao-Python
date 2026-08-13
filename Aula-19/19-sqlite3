@@ -1,0 +1,72 @@
+import sqlite3
+
+c = sqlite3.connect('cadastro.db') # Conecta ao banco de dados (se o banco não existir, ele será criado)
+cs = c.cursor() # Cria um cursor para interagir com o BD, onde permite utilizar a linguagem sql
+
+cs.execute('''
+    CREATE TABLE IF NOT EXISTS clientes(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,            
+        nome TEXT NOT NULL,
+        email TEXT NOT NULL 
+   )
+''')
+
+c.commit() # Salva as alterações
+
+
+# CRUD - Create, Read, Update, Delete
+
+def cad_cliente(nome, email):
+    cs.execute('INSERT INTO clientes (nome, email) values(?,?)', (nome, email))
+    c.commit()
+
+def list_clientes():
+    cs.execute('SELECT * FROM clientes')
+    return cs.fetchall() # Trás os dados em forma de listas
+
+def atualizar_email(id_cliente, novo_email):
+    cs.execute('UPDATE clientes SET email=? WHERE id=?', (novo_email, id_cliente))
+    c.commit()
+
+def del_cliente(id_cliente):
+    cs.execute('DELETE FROM clientes WHERE id = ?', (id_cliente,))
+
+def sistema():
+    while True:
+        op = input(f'''
+        Opções:
+        1 - Cadastrar cliente
+        2 - Atualizar cadastro
+        3 - Deletar cadastro
+                   
+        O que deseja fazer? ''')
+
+        if op == '1':
+            print('\nCADASTRO')
+            nome =  input('Nome: ')
+            email = input('e - mail: ')
+            cad_cliente(nome, email)
+            print('\nTabela atualizada: ', list_clientes())
+
+
+        elif op == '2':
+            print('\nUPDATE')
+            print(list_clientes()) 
+            id  =  int(input('ID do cadastro que deseja atualizar: '))
+            n_email = input('e - mail: ')
+            atualizar_email(id, n_email)
+            print('\nTabela atualizada: ', list_clientes())
+
+
+
+        elif op == '3':
+            print('\nDELETE')
+            print(list_clientes())
+            id  =  int(input('ID do cadastro que deseja deletar: '))
+            del_cliente(id)
+            print('\nTabela atualizada: ', list_clientes())
+
+
+sistema()
+
+c.close()
