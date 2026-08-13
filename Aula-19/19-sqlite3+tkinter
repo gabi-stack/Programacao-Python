@@ -1,0 +1,99 @@
+import sqlite3
+import tkinter as tk
+from tkinter import messagebox
+
+c = sqlite3.connect('cadastro.db') # Conecta ao banco de dados (se o banco não existir, ele será criado)
+cs = c.cursor() # Cria um cursor para interagir com o BD, onde permite utilizar a linguagem sql
+
+cs.execute('''
+    CREATE TABLE IF NOT EXISTS clientes(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,            
+        nome TEXT NOT NULL,
+        email TEXT NOT NULL 
+   )
+''')
+
+c.commit() # Salva as alterações
+
+
+# CRUD - Create, Read, Update, Delete
+
+def cad_cliente(nome, email):
+    cs.execute('INSERT INTO clientes (nome, email) values(?,?)', (nome, email))
+    c.commit()
+    messagebox.showinfo('', 'DADOS INSERIDOS COM SUCESSO')
+
+def list_clientes():
+    cs.execute('SELECT * FROM clientes')
+    return cs.fetchall() # Trás os dados em forma de listas
+
+def atualizar_email(id_cliente, novo_email):
+    cs.execute('UPDATE clientes SET email=? WHERE id=?', (novo_email, id_cliente))
+    c.commit()
+
+def del_cliente(id_cliente):
+    cs.execute('DELETE FROM clientes WHERE id = ?', (id_cliente,))
+
+def sistema():
+    while True:
+        op = input(f'''
+        Opções:
+        1 - Cadastrar cliente
+        2 - Atualizar cadastro
+        3 - Deletar cadastro
+                   
+        O que deseja fazer? ''')
+
+        if op == '1':
+            print('\nCADASTRO')
+            nome =  input('Nome: ')
+            email = input('e - mail: ')
+            cad_cliente(nome, email)
+            print('\nTabela atualizada: ', list_clientes())
+
+
+        elif op == '2':
+            print('\nUPDATE')
+            print(list_clientes()) 
+            id  =  int(input('ID do cadastro que deseja atualizar: '))
+            n_email = input('e - mail: ')
+            atualizar_email(id, n_email)
+            print('\nTabela atualizada: ', list_clientes())
+
+
+
+        elif op == '3':
+            print('\nDELETE')
+            print(list_clientes())
+            id  =  int(input('ID do cadastro que deseja deletar: '))
+            del_cliente(id)
+            print('\nTabela atualizada: ', list_clientes())
+
+
+root  =  tk.Tk()
+root.geometry('500x350')
+root.configure(bg = 'lightblue')
+# root.iconbitmap('i.ico')
+
+
+tk.Label(root, text =  'CADASTRO DE USUÁRIOS:', font = ('system','15') , bg='lightblue').grid(row=0, column=1)
+
+
+tk.Label(root, text =  'nome:', bg='lightblue', font = ('system','10')).grid(row=3, column=1)
+nome_input = tk.Entry(root)
+nome_input.grid(row=3, column=2)  
+
+
+tk.Label(root, text =  'e- mail:', bg='lightblue', font = ('system','10')).grid(row=5, column=1)
+email_input = tk.Entry(root)
+email_input.grid(row=5, column=2)  
+
+
+btn =  tk.Button(root, text= 'Inserir', command=cad_cliente, width=15, font = ('system','10'))
+btn.grid(row=7, column=1, pady=10)
+
+root.mainloop()
+
+sistema()
+
+c.close()
