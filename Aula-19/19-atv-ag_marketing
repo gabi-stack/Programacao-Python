@@ -7,7 +7,7 @@ c = sqlite3.connect('ag_marketing')
 cs = c.cursor()
 
 cs.execute('''
-CREATE TABLE IF NOT EXISTS Funcionarios(
+CREATE TABLE IF NOT EXISTS Clientes(
     id integer primary key autoincrement,
     Nome text not null,
     Idade integer not null,
@@ -26,8 +26,8 @@ select_id = None
 def atualizar_lista():
     for widget in scroll.winfo_children():
         widget.destroy()
-    cs.execute('SELECT * FROM Funcionarios ORDER BY id ASC')
-    for id, nome in cs.fetchall():
+    cs.execute('SELECT id, nome FROM Clientes ORDER BY id ASC')
+    for cliente_id, nome in cs.fetchall():
         btn = ctk.CTkButton(
             scroll,
             text=nome,
@@ -35,84 +35,79 @@ def atualizar_lista():
             fg_color=('grey', 'gray20'),
             text_color=('black', 'white'),
             hover_color=('grey', 'gray30'),
-            command=lambda i = id , n = nome: selecionar(i, n)
+            command=lambda i = cliente_id: selecionar(i)
         )
-        btn.pack(fill='x', padx=2)
+        btn.pack(fill='x', padx=2, pady=2)
 
-def selecionar(id, nome):
+def selecionar(cliente_id):
     global select_id
-    select_id = id
+    select_id = cliente_id
+    
+    # Busca os dados completos do cliente selecionado
+    cs.execute('SELECT Nome, Idade, Email, Endereço, Trabalho, Graduação FROM Clientes WHERE id = ?', (cliente_id,))
+    cliente = cs.fetchone()
+    
+    if cliente:
+        limpar_campos()
+        entry_nome.insert(0, cliente[0])
+        entry_idade.insert(0, str(cliente[1]))
+        entry_email.insert(0, cliente[2])
+        entry_endereco.insert(0, cliente[3])
+        entry_trabalho.insert(0, cliente[4])
+        entry_graduacao.insert(0, cliente[5])
+
+def limpar_campos():
     entry_nome.delete(0, 'end')
-    entry_nome.insert(0, nome)
-    btn_save.configure(text= 'Atualizar')
+    entry_idade.delete(0, 'end')
+    entry_email.delete(0, 'end')
+    entry_endereco.delete(0, 'end')
+    entry_trabalho.delete(0, 'end')
+    entry_graduacao.delete(0, 'end')
 
 def limpar():
     global select_id
     select_id = None
-    entry.delete(0, 'end')
-    btn_save.configure(text= 'Salvar')
+    limpar_campos()
+    btn_save.configure(text='Salvar')
 
 
 def salvar():
-    txt = entry.get().strip()
-    if not txt:
+    nome = entry_nome.get().strip()
+    idade = entry_idade.get().strip()
+    email = entry_email.get().strip()
+    endereco = entry_endereco.get().strip()
+    trabalho = entry_trabalho.get().strip()
+    graduacao = entry_graduacao.get().strip()
+    
+    # Validação simples para evitar campos vazios
+    if not (nome and idade and email and endereco and trabalho and graduacao):
         return
+
     if select_id:
-        cursor.execute(
-            'UPDATE itens SET nome = ? WHERE id = ?', (select_id)
-        )
+        # Atualiza cliente existente
+        cs.execute('''
+            UPDATE Clientes 
+            SET Nome = ?, Idade = ?, Email = ?, Endereço = ?, Trabalho = ?, Graduação = ?
+            WHERE id = ?
+        ''', (nome, idade, email, endereco, trabalho, graduacao, select_id))
     else:
-        cursor.execute('INSERT INTO itens (nome) VALUES (?)', (txt,))
-    conn.commit()
+        # Insere novo cliente
+        cs.execute('''
+            INSERT INTO Clientes (Nome, Idade, Email, Endereço, Trabalho, Graduação)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (nome, idade, email, endereco, trabalho, graduacao))
+
+    c.commit()
     limpar()
     atualizar_lista()
 
 def excluir():
+    global select_id
     if select_id:
-        cursor.execute('DELETE FROM itens WHERE id= ?', (select_id,))
-        conn.commit()
+        cs.execute('DELETE FROM Clientes WHERE id = ?', (select_id,))
+        c.commit()
         limpar()
         atualizar_lista()
-
-
-
-
-
-
-
-
-
-
-
-def cadastro(nome, idade, email, endereco, trabalho, graduacao):
-    cs.execute('INSERT INTO Funcionarios (Nome, Idade, Email, Endereço, Trabalho, Graduação) VALUES (?,?,?,?,?,?)', (nome, idade, email, endereco, trabalho, graduacao))
-    c.commit()
-
-def visualizar():
-    cs.execute('SELECT * FROM Funcionarios')
-    return cs.fetchall() 
-
-def alterar():
-    while True:
-        p_alter = (f'''
-Qual campo você deseja alterar?
-1-Nome
-2-Idade
-3-e-mail
-4-Endereço
-5-Trabalho
-6-Graduação
-Digite o número: ''')
-        if p_alter == '1'
-
-def deletar():
-    cs.execute('DELETE FROM Funcionarios WHERE id = ?', (id_cliente,))
-
-
-
-
-
-
 
 
 
@@ -120,63 +115,57 @@ def deletar():
 
 app = ctk.CTk()
 app.title('LEADS MARKETING')
-app.geometry('600x600')
+app.geometry('600x650')
 
-entry_nome = ctk.CTkEntry(app, placeholder_text='NOME')
-entry_nome.pack()
+entry_nome = ctk.CTkEntry(app, placeholder_text='NOME', width=300)
+entry_nome.pack(pady=5)
 
-entry_idade = ctk.CTkEntry(app, placeholder_text='IDADE')
-entry_idade.pack()
+entry_idade = ctk.CTkEntry(app, placeholder_text='IDADE', width=300)
+entry_idade.pack(pady=5)
 
-entry_email = ctk.CTkEntry(app, placeholder_text='E-MAIL')
-entry_email.pack()
+entry_email = ctk.CTkEntry(app, placeholder_text='E-MAIL', width=300)
+entry_email.pack(pady=5)
 
-entry_endereco = ctk.CTkEntry(app, placeholder_text='ENDEREÇO')
-entry_endereco.pack()
+entry_endereco = ctk.CTkEntry(app, placeholder_text='ENDEREÇO', width=300)
+entry_endereco.pack(pady=5)
 
-entry_trabalho = ctk.CTkEntry(app, placeholder_text='TRABALHO')
-entry_trabalho.pack()
+entry_trabalho = ctk.CTkEntry(app, placeholder_text='TRABALHO', width=300)
+entry_trabalho.pack(pady=5)
 
-entry_graduacao = ctk.CTkEntry(app, placeholder_text='GRADUAÇÃO')
-entry_graduacao.pack()
+entry_graduacao = ctk.CTkEntry(app, placeholder_text='GRADUAÇÃO', width=300)
+entry_graduacao.pack(pady=5)
 
+# Container de botões
 btn_frame = ctk.CTkFrame(app, fg_color='transparent')
-btn_frame.pack()
+btn_frame.pack(pady=10)
 
 # botão de salvar
-btn_save = ctk.CTkButton(btn_frame, text = 'Salvar', hover_color='white', width=100, command=salvar)
-btn_save.pack(side = 'left', expand = True, padx = 2)
+btn_save = ctk.CTkButton(btn_frame, text = 'Salvar', width=100, command=salvar)
+btn_save.pack(side = 'left', expand = True, padx = 5)
 
 # botão deletar
 btn_delete = ctk.CTkButton(btn_frame, text='Deletar',
-                           hover_color='white',
+                           hover_color='darkred',
                            fg_color='red',
                            width=100,
                            command=excluir
                            )
-btn_delete.pack(side = 'left', expand = True, padx = 2)
+btn_delete.pack(side = 'left', expand = True, padx = 5)
 
 # botão limpar
 btn_clear = ctk.CTkButton(btn_frame, text='Limpar',
-                          hover_color='white',
+                          hover_color='darkgreen',
                           fg_color='green',
                           width=100,
                           command=limpar
                           )
-btn_clear.pack(side = 'left', expand = True, padx = 2)
+btn_clear.pack(side = 'left', expand = True, padx = 5)
 
 # barra de rolagem
-scroll = ctk.CTkScrollableFrame(app)
+scroll = ctk.CTkScrollableFrame(app, width=350, height=200)
 scroll.pack(padx=20, pady=20, fill='both', expand=True)
 
 
-
-
-nome = nome_input.get()
-idade = idade_input.get()
-email = email_input.get()
-endereco = endereco_input.get()
-trabalho = trabalho_input.get()
-graduacao = graduacao_input.get()
+atualizar_lista()
 
 app.mainloop()
