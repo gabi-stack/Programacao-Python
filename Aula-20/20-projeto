@@ -1,0 +1,44 @@
+import streamlit as st
+import pandas as pd
+import sqlite3
+from datetime import datetime
+
+conexao = sqlite3.connect('banco')
+c = conexao.cursor()
+
+c.execute('''CREATE TABLE IF NOT EXISTS ideias(
+id integer primary key autoincrement,
+titulo text not null,
+descricao text not nul,
+autor text not null,
+data text not null,
+votos integer default 0
+)''')
+
+st.title('PAINEL DE IDEIAS')
+st.header('Registre suas ideias mirabolantes e veja quantos votos ela recebe!')
+
+with st.sidebar:
+  st.subheader("💡 Envie sua ideia")
+  # Seus campos de input e botão de salvar ficam aqui dentro
+  with st.form('Formulário'):
+    titulo = st.text_input('Título')
+    descricao = st.text_area('Descrição')
+    autor = st.text_input('Autor')
+    data_atual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+# Exemplo conceitual de como estruturar dentro do loop de ideias:
+col_info, col_voto = st.columns([4, 1])
+
+with col_info:
+  st.markdown("### Título da Ideia")
+  st.write("Descrição detalhada da ideia enviada pelo usuário...")
+  st.caption("Enviado por: Nome | Data: 14/08/2026")
+
+with col_voto:
+  st.metric("Votos", 12)
+  # Botão de votar fica aqui
+  st.button("👍 Votar", key=f"btn_{id}")
+
+  
