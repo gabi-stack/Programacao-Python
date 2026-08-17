@@ -1,0 +1,162 @@
+# GERENCIADOR DE ESTOQUE
+
+import sqlite3
+import customtkinter as ctk
+from tkinter import messagebox
+
+conexao = sqlite3.connect('Estoque.db')
+c = conexao.cursor()
+
+c.execute('''
+    CREATE TABLE IF NOT EXISTS produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    preco REAL NOT NULL,
+    quantidade INTEGER NOT NULL
+)'''
+)
+conexao.commit()
+
+def inserir_produto(nome, preco, quantidade):
+    c.execute("INSERT INTO produtos (nome, preco, quantidade) VALUES (?, ?, ?)", (nome, preco, quantidade))
+    conexao.commit()
+
+def obter_produtos():
+    c.execute("SELECT * FROM produtos")
+    produtos = c.fetchall()
+    return produtos
+
+def excluir_produto(id_produto):
+    c.execute("DELETE FROM produtos WHERE id = ?", (id_produto,))
+    conexao.commit()
+    
+
+ctk.set_appearance_mode("System")
+ctk.set_default_color_theme("blue")
+
+class AppEstoque(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Sistema de Mini Estoque")
+        self.geometry("750x550")
+        self.resizable(False, False)
+
+        # --- FRAME ESQUERDO: FORMULÁRIO DE CADASTRO ---
+        self.frame_form = ctk.CTkFrame(self, width=250, corner_radius=0)
+        self.frame_form.pack(side="left", fill="y", padx=10, pady=10)
+
+        self.label_titulo = ctk.CTkLabel(self.frame_form, text="Novo Produto", font=("Arial", 18, "bold"))
+        self.label_titulo.pack(pady=20)
+
+        self.entry_nome = ctk.CTkEntry(self.frame_form, placeholder_text="Nome do Produto")
+        self.entry_nome.pack(pady=10, padx=15, fill="x")
+
+        self.entry_preco = ctk.CTkEntry(self.frame_form, placeholder_text="Preço (Ex: 19.99)")
+        self.entry_preco.pack(pady=10, padx=15, fill="x")
+
+        self.entry_qtd = ctk.CTkEntry(self.frame_form, placeholder_text="Quantidade")
+        self.entry_qtd.pack(pady=10, padx=15, fill="x")
+
+        self.btn_salvar = ctk.CTkButton(
+            self.frame_form, 
+            text="Cadastrar Produto", 
+            fg_color="green", 
+            hover_color="darkgreen", 
+            command=self.salvar_produto
+        )
+        self.btn_salvar.pack(pady=20, padx=15, fill="x")
+
+        # --- FRAME DIREITO: LISTAGEM DE PRODUTOS ---
+        self.frame_lista = ctk.CTkFrame(self)
+        self.frame_lista.pack(side="right", fill="both", expand=True, padx=10, pady=10)
+
+        self.label_lista_titulo = ctk.CTkLabel(self.frame_lista, text="Produtos em Estoque", font=("Arial", 16, "bold"))
+        self.label_lista_titulo.pack(pady=10)
+
+        # Scrollable Frame para mostrar a lista de itens
+        self.scroll_frame = ctk.CTkScrollableFrame(self.frame_lista, width=430, height=420)
+        self.scroll_frame.pack(pady=5, padx=10, fill="both", expand=True)
+
+        # Carrega os dados na tela ao iniciar
+        self.atualizar_lista()
+
+    def salvar_produto(self):
+        nome = self.entry_nome.get().strip()
+        preco_str = self.entry_preco.get().strip().replace(",", ".")
+        qtd_str = self.entry_qtd.get().strip()
+
+        # Validações básicas
+        if not nome or not preco_str or not qtd_str:
+            messagebox.showerror("Erro", "Preencha todos os campos!")
+            return
+
+        try:
+            preco = float(preco_str)
+            quantidade = int(qtd_str)
+        except ValueError:
+            messagebox.showerror("Erro", "O preço deve ser numérico e a quantidade inteira!")
+            return
+
+        # Salva no banco de dados
+        inserir_produto(nome, preco, quantidade)
+        messagebox.showinfo("Sucesso", "Produto cadastrado com sucesso!")
+        
+        # Limpa os campos de texto
+        self.entry_nome.delete(0, "end")
+        self.entry_preco.delete(0, "end")
+        self.entry_qtd.delete(0, "end")
+
+        # Atualiza a lista na tela
+        self.atualizar_lista()
+
+    def atualizar_lista(self):
+        # Limpa os itens antigos do frame de listagem
+        for widget in self.scroll_frame.winfo_children():
+            widget.destroy()
+
+        produtos = obter_produtos()
+
+        if not produtos:
+            lbl_vazio = ctk.CTkLabel(self.scroll_frame, text="Nenhum produto cadastrado.", text_color="gray")
+            lbl_vazio.pack(pady=20)
+            return
+
+        for p in produtos:
+            id_prod, nome, preco, qtd = p
+
+            # Frame individual para cada linha de produto
+            item_frame = ctk.CTkFrame(self.scroll_frame, fg_color=("gray85", "gray20"))
+            item_frame.pack(fill="x", pady=5, padx=5)
+
+            # Monta o texto descritivo
+            texto_item = f"ID: {id_prod} | {nome}\nPreço: R$ {preco:.2f} | Qtd: {qtd}"
+            
+            # Alerta visual se o estoque estiver baixo (< 5)
+            cor_texto = None
+            if qtd < 5:
+                texto_item += " (ESTOQUE BAIXO!)"
+                cor_texto = "#FF5555"
+
+            lbl_item = ctk.CTkLabel(item_frame, text=texto_item, justify="left", text_color=cor_texto)
+            lbl_item.pack(side="left", padx=10, pady=5)
+
+            # Botão de excluir para cada item
+            btn_excluir = ctk.CTkButton(
+                item_frame, 
+                text="Excluir", 
+                width=70, 
+                fg_color="red", 
+                hover_color="darkred", 
+                command=lambda id=id_prod: self.deletar_produto(id)
+            )
+            btn_excluir.pack(side="right", padx=10)
+
+    def deletar_produto(self, id_produto):
+        if messagebox.askyesno("Confirmação", "Deseja realmente excluir este produto?"):
+            excluir_produto(id_produto)
+            self.atualizar_lista()
+
+if __name__ == "__main__":
+    app = AppEstoque()
+    app.mainloop()
